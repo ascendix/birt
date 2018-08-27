@@ -22,6 +22,8 @@
 						<plugin id="org.apache.xml.serializer"/>
 						<plugin id="org.apache.poi"/>
 						<plugin id="com.itextpdf.text"/>
+						<plugin id="org.apache.batik.ext.awt.extension"/>
+						<plugin id="org.w3c.dom.svg.extension"/>
 					</excludes>
 				</configuration>
 			</plugin>

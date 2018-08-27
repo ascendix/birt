@@ -23,6 +23,8 @@
 						<plugin id="javax.wsdl"/>
 						<plugin id="org.apache.poi"/>
 						<plugin id="com.itextpdf.text"/>
+						<plugin id="org.w3c.dom.svg.extension"/>
+						<plugin id="org.apache.batik.ext.awt.extension"/>
 					</excludes>
 				</configuration>
 			</plugin>
