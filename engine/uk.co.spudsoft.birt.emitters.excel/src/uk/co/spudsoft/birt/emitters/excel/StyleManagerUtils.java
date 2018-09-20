@@ -13,25 +13,12 @@
 
 package uk.co.spudsoft.birt.emitters.excel;
 
-import java.awt.font.FontRenderContext;
-import java.awt.font.LineBreakMeasurer;
-import java.awt.font.TextAttribute;
-import java.awt.font.TextLayout;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URLConnection;
-import java.text.AttributedString;
-import java.text.DateFormat;
-import java.util.Collection;
-import java.util.List;
-import java.util.Locale;
-
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.DataFormat;
+import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.PrintSetup;
 import org.apache.poi.ss.usermodel.RichTextString;
 import org.apache.poi.ss.usermodel.Row;
@@ -48,8 +35,22 @@ import org.eclipse.birt.report.engine.css.engine.value.css.CSSConstants;
 import org.eclipse.birt.report.engine.ir.DimensionType;
 import org.eclipse.birt.report.model.api.util.ColorUtil;
 import org.w3c.dom.css.CSSValue;
-
 import uk.co.spudsoft.birt.emitters.excel.framework.Logger;
+
+import java.awt.font.FontRenderContext;
+import java.awt.font.LineBreakMeasurer;
+import java.awt.font.TextAttribute;
+import java.awt.font.TextLayout;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URLConnection;
+import java.text.AttributedString;
+import java.text.DateFormat;
+import java.util.Collection;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * <p>
@@ -126,17 +127,17 @@ public abstract class StyleManagerUtils {
 	 * @return
 	 * One of the CellStyle.ALIGN* constants.
 	 */
-	public short poiAlignmentFromBirtAlignment(String alignment) {
+	public HorizontalAlignment poiAlignmentFromBirtAlignment(String alignment) {
 		if(CSSConstants.CSS_LEFT_VALUE.equals(alignment)) {
-			return CellStyle.ALIGN_LEFT;
+			return HorizontalAlignment.LEFT;
 		}
 		if(CSSConstants.CSS_RIGHT_VALUE.equals(alignment)) {
-			return CellStyle.ALIGN_RIGHT;
+			return HorizontalAlignment.RIGHT;
 		}
 		if(CSSConstants.CSS_CENTER_VALUE.equals(alignment)) {
-			return CellStyle.ALIGN_CENTER;
+			return HorizontalAlignment.CENTER;
 		}
-		return CellStyle.ALIGN_GENERAL;
+		return HorizontalAlignment.GENERAL;
 	}
 	
 	/**
@@ -219,14 +220,14 @@ public abstract class StyleManagerUtils {
 	 * @return
 	 * One of the Font.BOLDWEIGHT_* constants.
 	 */
-	public short poiFontWeightFromBirt(String fontWeight) {
+	public boolean poiFontWeightFromBirt(String fontWeight) {
 		if(fontWeight == null) {
-			return 0;
+			return false;
 		}
 		if("bold".equals(fontWeight)) {
-			return Font.BOLDWEIGHT_BOLD;
+			return true;
 		}
-		return Font.BOLDWEIGHT_NORMAL;
+		return false;
 	}
 	
 	/**
@@ -294,7 +295,7 @@ public abstract class StyleManagerUtils {
 		if( cellStyle == null ) {
 			return true;
 		}
-		if( cellStyle.getFillPattern() == CellStyle.NO_FILL ) {
+		if( cellStyle.getFillPattern() == FillPatternType.NO_FILL.getCode() ) {
 			return true;
 		}
 		return false;
@@ -699,7 +700,7 @@ public abstract class StyleManagerUtils {
 	protected void addFontAttributes( AttributedString attrString, Font font, int startIdx, int endIdx) {
 		attrString.addAttribute(TextAttribute.FAMILY, font.getFontName(), startIdx, endIdx);
 		attrString.addAttribute(TextAttribute.SIZE, (float)font.getFontHeightInPoints(), startIdx, endIdx);
-        if (font.getBoldweight() == Font.BOLDWEIGHT_BOLD) attrString.addAttribute(TextAttribute.WEIGHT, TextAttribute.WEIGHT_BOLD, startIdx, endIdx);
+		if (font.getBold()) attrString.addAttribute(TextAttribute.WEIGHT, TextAttribute.WEIGHT_BOLD, startIdx, endIdx);
         if (font.getItalic() ) attrString.addAttribute(TextAttribute.POSTURE, TextAttribute.POSTURE_OBLIQUE, startIdx, endIdx);
         if (font.getUnderline() == Font.U_SINGLE ) attrString.addAttribute(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON, startIdx, endIdx);
 	}

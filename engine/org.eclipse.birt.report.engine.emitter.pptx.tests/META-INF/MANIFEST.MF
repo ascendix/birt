@@ -7,7 +7,7 @@ Bundle-Version: 4.8.0.qualifier
 Require-Bundle: org.eclipse.birt.report.engine;bundle-version="4.2.3",
  org.eclipse.birt.report.engine.emitter.pptx;bundle-version="4.5.0",
  org.apache.xmlbeans;bundle-version="2.3.0",
- org.apache.poi;bundle-version="3.11.0",
+ org.apache.poi;bundle-version="3.17.0",
  org.dom4j;bundle-version="1.6.1",
  org.junit,
  javax.xml.stream;bundle-version="1.0.1"

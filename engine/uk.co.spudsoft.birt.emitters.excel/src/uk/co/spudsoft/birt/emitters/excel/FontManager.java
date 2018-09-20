@@ -160,10 +160,8 @@ public class FontManager {
 			font.setFontHeightInPoints(fontSize);
 		}
 		// Weight
-		short fontWeight = smu.poiFontWeightFromBirt(cleanupQuotes(birtStyle.getProperty( StyleConstants.STYLE_FONT_WEIGHT )));
-		if(fontWeight > 0) {
-			font.setBoldweight(fontWeight);
-		}
+		boolean isBold = smu.poiFontWeightFromBirt(cleanupQuotes(birtStyle.getProperty( StyleConstants.STYLE_FONT_WEIGHT )));
+		font.setBold(isBold);
 		// Style
 		String fontStyle = cleanupQuotes(birtStyle.getProperty( StyleConstants.STYLE_FONT_STYLE ) );
 		if( CSSConstants.CSS_ITALIC_VALUE.equals(fontStyle) || CSSConstants.CSS_OBLIQUE_VALUE.equals(fontStyle)) {

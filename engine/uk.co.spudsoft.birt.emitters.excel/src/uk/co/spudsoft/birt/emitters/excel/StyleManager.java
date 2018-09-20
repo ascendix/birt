@@ -19,6 +19,7 @@ import java.util.Locale;
 
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.extensions.XSSFCellBorder.BorderSide;
 import org.eclipse.birt.report.engine.content.IStyle;
@@ -190,12 +191,12 @@ public class StyleManager {
 		}
 		// Vertical alignment
 		if( CSSConstants.CSS_TOP_VALUE.equals( birtStyle.getString( StyleConstants.STYLE_VERTICAL_ALIGN ) ) ) {
-			poiStyle.setVerticalAlignment( CellStyle.VERTICAL_TOP );
+			poiStyle.setVerticalAlignment(VerticalAlignment.TOP);
 		} else if ( CSSConstants.CSS_MIDDLE_VALUE.equals( birtStyle.getString( StyleConstants.STYLE_VERTICAL_ALIGN ) ) ) {
-			poiStyle.setVerticalAlignment( CellStyle.VERTICAL_CENTER );
+			poiStyle.setVerticalAlignment(VerticalAlignment.CENTER);
 		} else if ( CSSConstants.CSS_BOTTOM_VALUE.equals( birtStyle.getString( StyleConstants.STYLE_VERTICAL_ALIGN ) ) ) {
-			poiStyle.setVerticalAlignment( CellStyle.VERTICAL_BOTTOM );
-		} 
+			poiStyle.setVerticalAlignment(VerticalAlignment.BOTTOM);
+		}
 		// Rotation
 		CSSValue rotation = birtStyle.getProperty( BirtStyle.TEXT_ROTATION );
 		if( rotation instanceof FloatValue ) {

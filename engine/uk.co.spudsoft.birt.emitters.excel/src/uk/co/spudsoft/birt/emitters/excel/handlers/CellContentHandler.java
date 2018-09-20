@@ -23,6 +23,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.poi.common.usermodel.HyperlinkType;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
@@ -154,12 +155,12 @@ public class CellContentHandler extends AbstractHandler {
 			}
 		}
 		if( hyperlinkUrl != null ) {
-			Hyperlink hyperlink = cell.getSheet().getWorkbook().getCreationHelper().createHyperlink(Hyperlink.LINK_URL);
+			Hyperlink hyperlink = cell.getSheet().getWorkbook().getCreationHelper().createHyperlink(HyperlinkType.URL);
 			hyperlink.setAddress(hyperlinkUrl);
 			cell.setHyperlink(hyperlink);
 		}
 		if( hyperlinkBookmark != null ) {
-			Hyperlink hyperlink = cell.getSheet().getWorkbook().getCreationHelper().createHyperlink(Hyperlink.LINK_DOCUMENT);
+			Hyperlink hyperlink = cell.getSheet().getWorkbook().getCreationHelper().createHyperlink(HyperlinkType.DOCUMENT);
 			hyperlink.setAddress(prepareName( hyperlinkBookmark ));
 			cell.setHyperlink(hyperlink);
 		}
