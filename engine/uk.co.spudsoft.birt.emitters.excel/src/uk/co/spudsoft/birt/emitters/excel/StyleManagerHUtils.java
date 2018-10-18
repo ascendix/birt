@@ -19,7 +19,9 @@ import org.apache.poi.hssf.usermodel.HSSFPalette;
 import org.apache.poi.hssf.usermodel.HSSFRichTextString;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.FillPatternType;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.RichTextString;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -77,9 +79,9 @@ public class StyleManagerHUtils extends StyleManagerUtils {
 	 * @return
 	 * One of the CellStyle BORDER constants.
 	 */
-	private short poiBorderStyleFromBirt( String birtBorder, String width ) {
+	private BorderStyle poiBorderStyleFromBirt(String birtBorder, String width ) {
 		if( "none".equals(birtBorder) ) {
-			return CellStyle.BORDER_NONE;
+			return BorderStyle.NONE;
 		}
 		DimensionType dim = DimensionType.parserUnit( width );
 		double pxWidth = 3.0;
@@ -88,28 +90,28 @@ public class StyleManagerHUtils extends StyleManagerUtils {
 		}
 		if( "solid".equals(birtBorder) ) {
 			if( pxWidth < 2.9 ) {
-				return CellStyle.BORDER_THIN;
+				return BorderStyle.THIN;
 			} else if( pxWidth < 3.1 ) {
-				return CellStyle.BORDER_MEDIUM;
+				return BorderStyle.MEDIUM;
 			} else {
-				return CellStyle.BORDER_THICK;
+				return BorderStyle.THICK;
 			}
 		} else if( "dashed".equals(birtBorder) ) {
 			if( pxWidth < 2.9 ) {
-				return CellStyle.BORDER_DASHED;
+				return BorderStyle.DASHED;
 			} else {
-				return CellStyle.BORDER_MEDIUM_DASHED;
+				return BorderStyle.MEDIUM_DASHED;
 			}
 		} else if( "dotted".equals(birtBorder) ) {
-			return CellStyle.BORDER_DOTTED;
+			return BorderStyle.DOTTED;
 		} else if( "double".equals(birtBorder) ) {
-			return CellStyle.BORDER_DOUBLE;
+			return BorderStyle.DOUBLE;
 		} else if( "none".equals(birtBorder) ) {
-			return CellStyle.BORDER_NONE;
+			return BorderStyle.NONE;
 		}
 
 		log.debug( "Border style \"", birtBorder, "\" is not recognised" );
-		return CellStyle.BORDER_NONE;
+		return BorderStyle.NONE;
 	}
 	
 	/**
@@ -152,11 +154,11 @@ public class StyleManagerHUtils extends StyleManagerUtils {
 
 			if( style instanceof HSSFCellStyle ) {
 				HSSFCellStyle hStyle = (HSSFCellStyle)style;
-				
-				short hBorderStyle = poiBorderStyleFromBirt(borderStyleString, widthString);
+
+				BorderStyle hBorderStyle = poiBorderStyleFromBirt(borderStyleString, widthString);
 				short colourIndex = getHColour((HSSFWorkbook)workbook, colourString);
 				if( colourIndex > 0 ) {
-					if(hBorderStyle != CellStyle.BORDER_NONE) {
+					if(hBorderStyle != BorderStyle.NONE) {
 						switch( side ) {
 						case TOP:
 							hStyle.setBorderTop(hBorderStyle);
@@ -215,7 +217,7 @@ public class StyleManagerHUtils extends StyleManagerUtils {
 			short colourIndex = getHColour((HSSFWorkbook)workbook, colour);
 			if( colourIndex > 0 ) {
 				cellStyle.setFillForegroundColor(colourIndex);
-				cellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+				cellStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
 			}
 		}
 	}

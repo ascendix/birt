@@ -168,7 +168,7 @@ public class ExcelFileReader {
 				}
 				formulaEvaluator = workBook.getCreationHelper()
 						.createFormulaEvaluator();
-				workBook.setMissingCellPolicy(Row.RETURN_NULL_AND_BLANK);
+				workBook.setMissingCellPolicy(Row.MissingCellPolicy.RETURN_NULL_AND_BLANK);
 				sheet = workBook.getSheet(workSheetList.get(currentSheetIndex));
 				if (sheet == null)
 					throw new OdaException(

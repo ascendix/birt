@@ -508,7 +508,7 @@ public class PageHandler extends AbstractHandler {
         anchor.setRow2(cell.getRowIndex() + rowsSpanned);
         anchor.setDx2(dx);
         anchor.setDy2( smu.anchorDyFromPoints( ptHeight, cell.getRow().getHeightInPoints() ) );
-        anchor.setAnchorType(ClientAnchor.MOVE_DONT_RESIZE);
+		anchor.setAnchorType(ClientAnchor.AnchorType.MOVE_DONT_RESIZE);
 	    drawing.createPicture(anchor, cellImage.imageIdx);
 	}
 	

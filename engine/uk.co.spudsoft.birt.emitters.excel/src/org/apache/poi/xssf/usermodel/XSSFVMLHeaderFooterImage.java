@@ -1,5 +1,27 @@
 package org.apache.poi.xssf.usermodel;
 
+import com.microsoft.schemas.office.office.CTIdMap;
+import com.microsoft.schemas.office.office.CTLock;
+import com.microsoft.schemas.office.office.CTShapeLayout;
+import com.microsoft.schemas.office.office.STConnectType;
+import com.microsoft.schemas.vml.CTFormulas;
+import com.microsoft.schemas.vml.CTImageData;
+import com.microsoft.schemas.vml.CTPath;
+import com.microsoft.schemas.vml.CTShape;
+import com.microsoft.schemas.vml.CTShapetype;
+import com.microsoft.schemas.vml.STExt;
+import com.microsoft.schemas.vml.STStrokeJoinStyle;
+import com.microsoft.schemas.vml.STTrueFalse;
+import org.apache.poi.POIXMLDocumentPart;
+import org.apache.poi.openxml4j.opc.PackagePart;
+import org.apache.poi.xssf.util.EvilUnclosedBRFixingInputStream;
+import org.apache.xmlbeans.XmlCursor;
+import org.apache.xmlbeans.XmlException;
+import org.apache.xmlbeans.XmlObject;
+import org.apache.xmlbeans.XmlOptions;
+import org.w3c.dom.Node;
+
+import javax.xml.namespace.QName;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -8,31 +30,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import javax.xml.namespace.QName;
-
-import org.apache.poi.POIXMLDocumentPart;
-import org.apache.poi.openxml4j.opc.PackagePart;
-import org.apache.poi.openxml4j.opc.PackageRelationship;
-import org.apache.poi.xssf.util.EvilUnclosedBRFixingInputStream;
-import org.apache.xmlbeans.XmlCursor;
-import org.apache.xmlbeans.XmlException;
-import org.apache.xmlbeans.XmlObject;
-import org.apache.xmlbeans.XmlOptions;
-import org.w3c.dom.Node;
-
-import schemasMicrosoftComOfficeOffice.CTIdMap;
-import schemasMicrosoftComOfficeOffice.CTLock;
-import schemasMicrosoftComOfficeOffice.CTShapeLayout;
-import schemasMicrosoftComOfficeOffice.STConnectType;
-import schemasMicrosoftComVml.CTFormulas;
-import schemasMicrosoftComVml.CTImageData;
-import schemasMicrosoftComVml.CTPath;
-import schemasMicrosoftComVml.CTShape;
-import schemasMicrosoftComVml.CTShapetype;
-import schemasMicrosoftComVml.STExt;
-import schemasMicrosoftComVml.STStrokeJoinStyle;
-import schemasMicrosoftComVml.STTrueFalse;
 
 public class XSSFVMLHeaderFooterImage extends POIXMLDocumentPart {
 
@@ -88,11 +85,6 @@ public class XSSFVMLHeaderFooterImage extends POIXMLDocumentPart {
 	newHeaderFooterImageVMLDrawing();
     }
 
-    public XSSFVMLHeaderFooterImage(PackagePart part, PackageRelationship rel) throws IOException, XmlException {
-	super(part, rel);
-	read(getPackagePart().getInputStream());
-    }
-
     protected void read(InputStream is) throws IOException, XmlException {
 	XmlObject root = XmlObject.Factory.parse(new EvilUnclosedBRFixingInputStream(is));
 
@@ -139,7 +131,7 @@ public class XSSFVMLHeaderFooterImage extends POIXMLDocumentPart {
 	shapetype.setCoordsize("21600,21600");
 	shapetype.setSpt(75);
 	shapetype.setPath2("m@4@5l@4@11@9@11@9@5xe");
-	shapetype.setPreferrelative(schemasMicrosoftComOfficeOffice.STTrueFalse.T);
+	shapetype.setPreferrelative(com.microsoft.schemas.office.office.STTrueFalse.T);
 	shapetype.setFilled(STTrueFalse.F);
 	shapetype.setStroked(STTrueFalse.F);
 
@@ -154,14 +146,14 @@ public class XSSFVMLHeaderFooterImage extends POIXMLDocumentPart {
     private void addNewLock(CTShapetype shapetype) {
 	CTLock lock = shapetype.addNewLock();
 	lock.setExt(STExt.EDIT);
-	lock.setAspectratio(schemasMicrosoftComOfficeOffice.STTrueFalse.T);
+	lock.setAspectratio(com.microsoft.schemas.office.office.STTrueFalse.T);
     }
 
     private void addNewPath(CTShapetype shapetype) {
 	CTPath path = shapetype.addNewPath();
 	path.setGradientshapeok(STTrueFalse.T);
 	path.setConnecttype(STConnectType.RECT);
-	path.setExtrusionok(schemasMicrosoftComOfficeOffice.STTrueFalse.F);
+	path.setExtrusionok(com.microsoft.schemas.office.office.STTrueFalse.F);
     }
 
     private void addNewFormulas(CTShapetype shapetype) {
@@ -219,7 +211,7 @@ public class XSSFVMLHeaderFooterImage extends POIXMLDocumentPart {
     private void addNewLock(CTShape shape) {
 	CTLock lock = shape.addNewLock();
 	lock.setExt(STExt.EDIT);
-	lock.setRotation(schemasMicrosoftComOfficeOffice.STTrueFalse.T);
+	lock.setRotation(com.microsoft.schemas.office.office.STTrueFalse.T);
     }
 
     @Override
@@ -249,6 +241,12 @@ public class XSSFVMLHeaderFooterImage extends POIXMLDocumentPart {
 	    xc.dispose();
 	}
 	rootCursor.dispose();
+
+	// google "POIXMLDocumentPart DEFAULT_XML_OPTIONS"
+	XmlOptions DEFAULT_XML_OPTIONS = new XmlOptions();
+	DEFAULT_XML_OPTIONS.setSaveOuter();
+	DEFAULT_XML_OPTIONS.setUseDefaultNamespace();
+	DEFAULT_XML_OPTIONS.setSaveAggressiveNamespaces();
 
 	XmlOptions xmlOptions = new XmlOptions(DEFAULT_XML_OPTIONS);
 	xmlOptions.setSavePrettyPrint();
