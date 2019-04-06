@@ -3,10 +3,12 @@ Bundle-ManifestVersion: 2
 Bundle-Name: BIRT CORE Tests Plug-in
 Bundle-SymbolicName: org.eclipse.birt.core.tests;singleton:=true
 Bundle-Version: 4.8.0.qualifier
-Eclipse-LazyStart: true
+Bundle-Activator: org.eclipse.birt.core.Activator
+Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.birt.core,
  org.eclipse.osgi,
  com.ibm.icu,
  org.junit;resolution:=optional;visibility:=reexport
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: Eclipse BIRT Project
+Automatic-Module-Name: org.eclipse.birt.core.tests
