@@ -56,7 +56,7 @@
                 <orbit.repo.url>http://download.eclipse.org/tools/orbit/downloads/drops/R20190226160451/repository/</orbit.repo.url>
                 <!-- https://eclipse.org/datatools/downloads.php  -->
                 <dtp.repo.url>https://download.eclipse.org/datatools/updates/1.14.102.201809101906/repository/</dtp.repo.url>
-                <jetty.version>9.4.10.v20180503</jetty.version>
+                <jetty.version>9.4.15.v20190215</jetty.version>
                 <!-- jetty.repo.url>http://download.eclipse.org/jetty/updates/jetty-bundles-9.x/</jetty.repo.url -->
                 <jetty.repo.url>http://download.eclipse.org/jetty/updates/jetty-bundles-9.x/${jetty.version}</jetty.repo.url>
             </properties>
