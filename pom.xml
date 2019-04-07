@@ -36,32 +36,21 @@
         <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
         <sonar-maven-plugin.version>3.6.0.1398</sonar-maven-plugin.version>
         <maven-antrun-plugin.version>1.8</maven-antrun-plugin.version>
-    </properties>
 
-    <!-- make release builds in particular quicker and more reliable -->
-    <profiles>
-        <profile>
-            <id>master</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <eclipse.release.name>photon</eclipse.release.name>
-                <eclipse.repo.url>http://download.eclipse.org/eclipse/updates/4.8/</eclipse.repo.url>
-                <emf.repo.url>http://download.eclipse.org/modeling/emf/emf/builds/milestone/latest</emf.repo.url>
-                <gef.repo.url>http://download.eclipse.org/tools/gef/updates/legacy/releases/</gef.repo.url>
-                <!-- https://wiki.eclipse.org/WTP_FAQ#How_do_I_install_WTP.3F -->
-                <wtp.repo.url>http://download.eclipse.org/webtools/downloads/drops/R3.9.5/R-3.9.5-20180409100740/repository/</wtp.repo.url>
-                <!-- http://download.eclipse.org/tools/orbit/downloads/ -->
-                <orbit.repo.url>http://download.eclipse.org/tools/orbit/downloads/drops/R20190226160451/repository/</orbit.repo.url>
-                <!-- https://eclipse.org/datatools/downloads.php  -->
-                <dtp.repo.url>https://download.eclipse.org/datatools/updates/1.14.102.201809101906/repository/</dtp.repo.url>
-                <jetty.version>9.4.15.v20190215</jetty.version>
-                <!-- jetty.repo.url>http://download.eclipse.org/jetty/updates/jetty-bundles-9.x/</jetty.repo.url -->
-                <jetty.repo.url>http://download.eclipse.org/jetty/updates/jetty-bundles-9.x/${jetty.version}</jetty.repo.url>
-            </properties>
-        </profile>
-    </profiles>
+        <eclipse.release.name>photon</eclipse.release.name>
+        <eclipse.repo.url>http://download.eclipse.org/eclipse/updates/4.8/</eclipse.repo.url>
+        <emf.repo.url>http://download.eclipse.org/modeling/emf/emf/builds/milestone/latest</emf.repo.url>
+        <gef.repo.url>http://download.eclipse.org/tools/gef/updates/legacy/releases/</gef.repo.url>
+        <!-- https://wiki.eclipse.org/WTP_FAQ#How_do_I_install_WTP.3F -->
+        <wtp.repo.url>http://download.eclipse.org/webtools/downloads/drops/R3.9.5/R-3.9.5-20180409100740/repository/</wtp.repo.url>
+        <!-- http://download.eclipse.org/tools/orbit/downloads/ -->
+        <orbit.repo.url>http://download.eclipse.org/tools/orbit/downloads/drops/R20190226160451/repository/</orbit.repo.url>
+        <!-- https://eclipse.org/datatools/downloads.php  -->
+        <dtp.repo.url>https://download.eclipse.org/datatools/updates/1.14.102.201809101906/repository/</dtp.repo.url>
+        <jetty.version>9.4.15.v20190215</jetty.version>
+        <!-- jetty.repo.url>http://download.eclipse.org/jetty/updates/jetty-bundles-9.x/</jetty.repo.url -->
+        <jetty.repo.url>http://download.eclipse.org/jetty/updates/jetty-bundles-9.x/${jetty.version}</jetty.repo.url>
+    </properties>
 
     <repositories>
         <!-- BIRT need Eclipse/EMF/GEF/DTP/ORBIT/WTP-->
